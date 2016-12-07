@@ -1,0 +1,539 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <windows.h>
+
+#define iz 75
+#define de 77
+#define ar 72
+#define ab 80
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+typedef struct datos{
+	int mov,mov2,mov3,movtot;
+	char name[40];
+};
+void imp_map_one(int matriz[11][20]);
+void imp_map_two(int matrizz[10][14]);
+void imp_map_tre(int matrizzz[12][13]);
+int main(int argc, char *argv[]) {
+	int map_one[11][20]={
+	{177,177,177,177,178,178,178,178,178,177,177,177,177,177,177,177,177,177,177,177},
+	{177,177,177,177,178,176,176,176,178,177,177,177,177,177,177,177,177,177,177,177},
+	{177,177,177,177,178,176,176,176,178,177,177,177,177,177,177,177,177,177,177,177},
+	{177,177,178,178,178,176,176,176,178,178,177,177,177,177,177,177,177,177,177,177},
+	{177,177,178,176,176,176,176,176,176,178,177,177,177,177,177,177,177,177,177,177},
+	{178,178,178,176,178,176,178,178,176,178,177,177,177,178,178,178,178,178,178,178},
+	{178,176,176,176,178,176,178,178,176,178,178,178,178,178,176,176,167,167,176,178},
+	{178,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,167,167,176,178},
+	{178,178,178,178,178,176,178,178,178,176,178,176,178,178,176,176,167,167,176,178},
+	{177,177,177,177,178,176,176,176,176,176,178,178,178,178,178,178,178,178,178,178},
+	{177,177,177,177,178,178,178,178,178,178,178,177,177,177,177,177,177,177,177,177}
+	};
+	
+	int map_two[10][14]={
+	{178,178,178,178,178,178,178,178,178,178,178,178,177,177},
+	{178,167,167,176,176,178,176,176,176,176,176,178,178,178},
+	{178,167,167,176,176,178,176,176,176,176,176,176,176,178},
+	{178,167,167,176,176,178,176,178,178,178,178,176,176,178},
+	{178,167,167,176,176,176,176,176,176,178,178,176,176,178},
+	{178,167,167,176,176,178,176,178,176,176,178,176,178,178},
+	{178,178,178,178,178,178,176,178,178,176,176,176,176,178},
+	{177,177,178,176,176,176,176,176,176,176,176,176,176,178},
+	{177,177,178,176,176,176,176,178,176,176,176,176,176,178},
+	{177,177,178,178,178,178,178,178,178,178,178,178,178,178},
+	};
+	
+	int map_tre[12][13]={
+	{177,177,177,177,177,177,177,178,178,178,178,178,177},
+	{177,178,178,178,178,178,178,178,176,176,176,178,178},
+	{178,178,176,178,176,178,178,178,176,176,176,176,178},
+	{178,176,176,176,176,176,176,176,176,176,176,176,178},
+	{178,176,176,176,176,178,178,178,178,176,176,176,178},
+	{178,178,178,176,178,178,178,178,178,176,178,178,178},
+	{178,176,176,176,176,178,178,178,176,176,167,167,178},
+	{178,176,178,176,176,176,176,176,167,167,167,167,178},
+	{178,176,176,176,176,178,178,178,167,167,167,167,178},
+	{178,176,176,176,176,178,177,178,167,167,167,167,178},
+	{178,176,176,178,178,178,177,178,178,178,178,178,178},
+	{178,178,178,178,177,177,177,177,177,177,177,177,177},
+	};
+	
+struct datos a1;
+
+int c,fi,co,c1,c11,c2,c22,c3,c33,c4,c44,c5,c55,c6,c66,l1,l11,l2,l22,l3,l33,l4,l44,l5,l55,l6,l66,g,y;
+
+l1=6,l11=10,l2=6,l22=11,l3=7,l33=10,l4=7,l44=11,l5=8,l55=10,l6=8,l66=11;
+
+y=0;
+char tecla;
+c=0;
+color(14);
+printf("\t\t\t\t\tSOKOBAN");
+color(15);
+printf("\n\n\t\tINSTRUCCIONES:Sokoban significa encargado de almac%cn en japon%cs. \n\t\tEl objetivo del juego es empujar las cajas hasta su lugar correcto dentro de un reducido almac%cn, \n\t\tcon el n%cmero m%cnimo de empujes y de pasos. Las cajas se pueden empujar solamente, y no tirar de ellas,\n\t\ty s%clo se puede empujar una caja a la vez. Parece f%ccil, pero los niveles van desde muy f%cciles\n\t\ta extremadamente dif%cciles, algunos llevan horas e incluso d%cas resolverlos. \n\n\t\tLas reglas son muy simples: \n\t\t1) Las cajas s%clo se pueden empujar, no se pueden arrastrar. \n\t\t2) Una caja s%clo se puede empujar si hay un hueco libre detr%cs de ella. \n\t\t3) No se pueden empujar dos o m%cs cajas a la vez  \n\n\t\tComo finaliza el juego: La partida termina si se cumple alguna de estas dos condiciones se cumple. \n\t\t1) El jugador queda trancado dentro del almac%cn. 2) Las cajas son llevadas a su deposito. ",130,130,130,163,161,162,160,160,161,161,162,162,160,160,130);
+color(2);
+printf("\n\n\tMUY BIEN, LLEGO LA HORA DE QUE DEMUESTRES LO QUE VALES, UTILIZA LOS DIRECCIONALES DE TU TECLADO PARA MOVERTE");
+color(15);
+printf("\n\n\t\tNombre:");
+scanf("%s",&a1.name);
+printf("\n\n\t\t\t\tEmpezemos %s\n\n\t",a1.name);
+system("PAUSE");
+system("cls");
+
+
+while(y==0){
+	c1=7,c11=2,c2=2,c22=5,c3=4,c33=5,c4=7,c44=5,c5=3,c55=7,c6=4,c66=7,g=0,fi=8,co=12,a1.mov=0;
+	map_one[fi][co]=2;
+while(c==0){
+	color(14);
+	printf("\t\t\t\t\tSOKOBAN");
+	color(9);
+	printf("\n\n\tJugador: %s \t\t\t\t\tMovimientos: %d",a1.name,a1.mov);
+	color(15);
+	map_one[c1][c11]=219;
+	map_one[c2][c22]=219;
+	map_one[c3][c33]=219;
+	map_one[c4][c44]=219;
+	map_one[c5][c55]=219;
+	map_one[c6][c66]=219;
+	map_one[fi][co]=2;
+	imp_map_one(map_one);
+	map_one[c1][c11]=176;
+	map_one[c2][c22]=176;
+	map_one[c3][c33]=176;
+	map_one[c4][c44]=176;
+	map_one[c5][c55]=176;
+	map_one[c6][c66]=176;
+	map_one[fi][co]=176;
+	if((map_one[fi+1][co]==167)||(map_one[fi-1][co]==167)||(map_one[fi][co-1]==167)){
+		map_one[fi][co]=167;
+	}
+	if((map_one[fi+2][co]==167)||(map_one[fi-2][co]==167)||(map_one[fi][co-2]==167)){
+		map_one[fi][co]=167;
+	}
+
+	tecla=getch();
+	if(tecla==ar){
+		if(map_one[fi-1][co]!=178){
+			if(fi-1==c1&&co==c11){
+			if(map_one[c1-1][c11]!=178){
+				c1--;
+			}
+				
+		}
+		if(fi-1==c2&&co==c22){
+			if(map_one[c2-1][c22]!=178){
+				c2--;
+			}
+		}
+		if(fi-1==c3&&co==c33){
+			if(map_one[c3-1][c33]!=178){
+				c3--;
+			}
+		}
+		if(fi-1==c4&&co==c44){
+			if(map_one[c4-1][c44]!=178){
+				c4--;
+			}
+		}
+		if(fi-1==c5&&co==c55){
+			if(map_one[c5-1][c55]!=178){
+				c5--;
+			}
+		}
+		if(fi-1==c6&&co==c66){
+			if(map_one[c6-1][c66]!=178){
+				c6--;
+			}
+		}
+		fi--;		
+		}
+		a1.mov++;
+	}
+	if(tecla==ab){
+		if(map_one[fi+1][co]!=178){
+			if(fi+1==c1&&co==c11){
+			if(map_one[c1+1][c11]!=178){
+				c1++;
+			}
+				
+		}
+		if(fi+1==c2&&co==c22){
+			if(map_one[c2+1][c22]!=178){
+				c2++;
+			}
+		}
+		if(fi+1==c3&&co==c33){
+			if(map_one[c3+1][c33]!=178){
+				c3++;
+			}
+		}
+		if(fi+1==c4&&co==c44){
+			if(map_one[c4+1][c44]!=178){
+				c4++;
+			}
+		}
+		if(fi+1==c5&&co==c55){
+			if(map_one[c5+1][c55]!=178){
+				c5++;
+			}
+		}
+		if(fi+1==c6&&co==c66){
+			if(map_one[c6+1][c66]!=178){
+				c6++;
+			}
+		}
+		fi++;
+		}
+		a1.mov++;
+	}
+	if(tecla==iz){
+		if(map_one[fi][co-1]!=178){
+			if(fi==c1&&co-1==c11){
+			if(map_one[c1][c11-1]!=178){
+				c11--;
+			}
+				
+		}
+		if(fi==c2&&co-1==c22){
+			if(map_one[c2][c22-1]!=178){
+				c22--;
+			}
+		}
+		if(fi==c3&&co-1==c33){
+			if(map_one[c3][c33-1]!=178){
+				c33--;
+			}
+		}
+		if(fi==c4&&co-1==c44){
+			if(map_one[c4][c44-1]!=178){
+				c44--;
+			}
+		}
+		if(fi==c5&&co-1==c55){
+			if(map_one[c5][c55-1]!=178){
+				c55--;
+			}
+		}
+		if(fi==c6&&co-1==c66){
+			if(map_one[c6][c66-1]!=178){
+				c66--;
+			}
+		}
+		co--;
+		}
+		a1.mov++;
+	}
+	if(tecla==de){
+		if(map_one[fi][co+1]!=178){
+
+		if(fi==c1&&co+1==c11){
+			if(map_one[c1][c11+1]!=178){
+				c11++;
+			}
+				
+		}
+		if(fi==c2&&co+1==c22){
+			if(map_one[c2][c22+1]!=178){
+				c22++;
+			}
+		}
+		if(fi==c3&&co+1==c33){
+			if(map_one[c3][c33+1]!=178){
+				c33++;
+			}
+		}
+		if(fi==c4&&co+1==c44){
+			if(map_one[c4][c44+1]!=178){
+				c44++;
+			}
+		}
+		if(fi==c5&&co+1==c55){
+			if(map_one[c5][c55+1]!=178){
+				c55++;
+			}
+		}
+		if(fi==c6&&co+1==c66){
+			if(map_one[c6][c66+1]!=178){
+				c66++;
+			}
+		}
+		co++;
+	
+		}
+		a1.mov++;
+	}	
+/*	if((map_one[c1][c11]==map_one[l1][l11]||map_one[c1][c11]==map_one[l2][l22]||map_one[c1][c11]==map_one[l3][l33]||map_one[c1][c11]==map_one[l4][l44]||map_one[c1][c11]==map_one[l5][l55]||map_one[c1][c11]==map_one[l6][l66])&&(map_one[c2][c22]==map_one[l1][l11]||map_one[c2][c22]==map_one[l2][l22]||map_one[c2][c22]==map_one[l3][l33]||map_one[c2][c22]==map_one[l4][l44]||map_one[c2][c22]==map_one[l5][l55]||map_one[c2][c22]==map_one[l6][l66])&&(map_one[c3][c33]==map_one[l1][l11]||map_one[c3][c33]==map_one[l2][l22]||map_one[c3][c33]==map_one[l3][l33]||map_one[c3][c33]==map_one[l4][l44]||map_one[c3][c33]==map_one[l5][l55]||map_one[c3][c33]==map_one[l6][l66])&&(map_one[c4][c44]==map_one[l1][l11]||map_one[c4][c44]==map_one[l2][l22]||map_one[c4][c44]==map_one[l3][l33]||map_one[c4][c44]==map_one[l4][l44]||map_one[c4][c44]==map_one[l5][l55]||map_one[c4][c44]==map_one[l6][l66])&&(map_one[c5][c55]==map_one[l1][l11]||map_one[c5][c55]==map_one[l2][l22]||map_one[c5][c55]==map_one[l3][l33]||map_one[c5][c55]==map_one[l4][l44]||map_one[c5][c55]==map_one[l5][l55]||map_one[c5][c55]==map_one[l6][l66])&&(map_one[c6][c66]==map_one[l1][l11]||map_one[c6][c66]==map_one[l2][l22]||map_one[c6][c66]==map_one[l3][l33]||map_one[c6][c66]==map_one[l4][l44]||map_one[c6][c66]==map_one[l5][l55]||map_one[c6][c66]==map_one[l6][l66])){
+		c=c+1;
+	}*/
+	if(map_one[c1][c11]==167){
+	g++;
+	}
+	if(map_one[c2][c22]==167){
+	g++;
+	}
+	if(map_one[c3][c33]==167){
+	g++;
+	}
+	if(map_one[c4][c44]==167){
+	g++;
+	}
+	if(map_one[c5][c55]==167){
+	g++;
+	}
+	if(map_one[c6][c66]==167){
+	g++;
+	}
+	if(g==9){
+	printf("\n\n\t\tParece que tu trabajo esta por terminar\n\n\t\t Deseas avanzar al siguiente nivel? \n\n\t\tsi(1) no(0) reiniciar(2):");
+	scanf("%d",&c);
+	}
+	if(g==11){
+	printf("\n\n\t\tParece que tu trabajo esta por terminar, \n\n\t\tDeseas avanzar al siguiente nivel? \n\n\t\tsi(1) no(0) reiniciar(2):");
+	scanf("%d",&c);
+	}
+	if(g==13){
+	printf("\n\n\t\tParece que tu trabajo esta por terminar, \n\n\t\tDeseas avanzar al siguiente nivel? \n\n\t\tsi(1) no(0) reiniciar(2):");
+	scanf("%d",&c);
+	}
+	if(g==15){
+	printf("\n\n\t\tParece que tu trabajo esta por terminar, \n\n\t\tDeseas avanzar al siguiente nivel? \n\n\t\tsi(1) no(0) reiniciar(2):");
+	scanf("%d",&c);
+	}
+	if(g==17){
+	printf("\n\n\t\tTu trabajo ha terminado, \n\n\t\tDeseas avanzar al siguiente nivel? si(1) reiniciar(2):");
+	scanf("%d",&c);
+	}
+	
+	
+	if(map_one[c1+1][c11]==178&&map_one[c1][c11-1]==178){
+		if(map_one[c1][c11]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+
+	}
+	if(map_one[c1+1][c11]==178&&map_one[c1][c11+1]==178){
+		if(map_one[c1][c11]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+	}
+	if(map_one[c1-1][c11]==178&&map_one[c1][c11+1]==178){
+		if(map_one[c1][c11]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+	}
+	if(map_one[c1-1][c11]==178&&map_one[c1][c11-1]==178){
+		if(map_one[c1][c11]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+	}
+	
+	
+	
+	if(map_one[c2+1][c22]==178&&map_one[c2][c22-1]==178){
+		if(map_one[c2][c22]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+	}
+	if(map_one[c2+1][c22]==178&&map_one[c2][c22+1]==178){
+		if(map_one[c2][c22]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+	}
+	if(map_one[c2-1][c22]==178&&map_one[c2][c22+1]==178){
+		if(map_one[c2][c22]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+	}
+	if(map_one[c2-1][c22]==178&&map_one[c2][c22-1]==178){
+		if(map_one[c2][c22]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+	}
+	
+	
+	
+	if(map_one[c3+1][c33]==178&&map_one[c3][c33-1]==178){
+		if(map_one[c3][c33]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+	}
+	if(map_one[c3+1][c33]==178&&map_one[c3][c33+1]==178){
+		if(map_one[c3][c33]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+	}
+	if(map_one[c3-1][c33]==178&&map_one[c3][c33+1]==178){
+		if(map_one[c3][c33]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+	}
+	if(map_one[c3-1][c33]==178&&map_one[c3][c33-1]==178){
+		if(map_one[c3][c33]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+	}
+	
+	
+	
+	if(map_one[c4+1][c44]==178&&map_one[c4][c44-1]==178){
+		if(map_one[c4][c44]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+	}
+	if(map_one[c4+1][c44]==178&&map_one[c4][c44+1]==178){
+		if(map_one[c4][c44]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+	}
+	if(map_one[c4-1][c44]==178&&map_one[c4][c44+1]==178){
+		if(map_one[c4][c44]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+	}
+	if(map_one[c4-1][c44]==178&&map_one[c4][c44-1]==178){
+		if(map_one[c4][c44]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+	}
+	
+
+	if(map_one[c5+1][c55]==178&&map_one[c5][c55-1]==178){
+		if(map_one[c5][c55]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+	}
+	if(map_one[c5+1][c55]==178&&map_one[c5][c55+1]==178){
+		if(map_one[c5][c55]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+	}
+	if(map_one[c5-1][c55]==178&&map_one[c5][c55+1]==178){
+	if(map_one[c5][c55]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+	}
+	if(map_one[c5-1][c55]==178&&map_one[c5][c55-1]==178){
+		if(map_one[c5][c55]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+	}
+	
+	
+	if(map_one[c6+1][c66]==178&&map_one[c6][c66-1]==178){
+		if(map_one[c6][c66]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+	}
+	if(map_one[c6+1][c66]==178&&map_one[c6][c66+1]==178){
+		if(map_one[c6][c66]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+	}
+	if(map_one[c6-1][c66]==178&&map_one[c6][c66+1]==178){
+		if(map_one[c6][c66]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+	}
+	if(map_one[c6-1][c66]==178&&map_one[c6][c66-1]==178){	
+		if(map_one[c6][c66]==176){
+		printf("Rayos!! Te Trancaste, Reiniciar (2),ver error (0):");
+		scanf("%d",&c);
+		}
+
+	}
+	
+	
+/*	if(tecla=='g')
+	c=c+1;*/
+system("cls");
+
+}
+	if(c==2){
+		color(14);
+		printf("\n\n\n\n\n\n\n\n\t\t\t\tLas cajas se estan reorganizando...\n\n\t\t");
+		color(15);
+		system("PAUSE");
+		system("cls");
+		c=c-2;
+	}
+		if(c==1){
+		printf("\n\n\n\t\t\tHas Ganado el nivel 1\n\t\t\tPreparate para el siguiente nivel...\n\n");
+		system("PAUSE");
+		y=y+1;
+		system("cls");
+	}
+
+}
+while(y==1){
+	printf("stage 2");
+}
+
+
+	
+
+/*	imp_map_two(map_two);
+	printf("\n");
+	imp_map_tre(map_tre);*/
+	return 0;
+}
+void imp_map_one(int matriz[11][20]){
+	int q,w;
+	color(7);
+	for(q=0;q<11;q++){
+		printf("\n");
+		printf("\t\t\t\t");
+		for(w=0;w<20;w++){
+			printf("%c",matriz[q][w]);
+		}
+	}
+}
+void imp_map_two(int matrizz[10][14]){
+	int e,r;
+	for(e=0;e<10;e++){
+		printf("\n");
+		printf("\t\t\t\t");
+		for(r=0;r<14;r++){
+			printf("%c",matrizz[e][r]);
+		}
+	}
+}
+void imp_map_tre(int matrizzz[12][13]){
+	int t,y;
+	for(t=0;t<12;t++){
+		printf("\n");
+		for(y=0;y<13;y++){
+			printf("%c",matrizzz[t][y]);
+		}
+	}
+}
+void  color(int c){
+
+	HANDLE consol;
+	consol = GetStdHandle
+		(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute
+		(consol, c);
+}
